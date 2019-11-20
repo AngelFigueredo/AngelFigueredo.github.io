@@ -10,7 +10,7 @@
                 bottom:0px;
                 left:0px;
                 right: 0px;
-                background-color: green;
+                background-color: blue;
             }
             #leftPane
             {
@@ -20,13 +20,13 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: red;
+               
             }
             #rightPane{
                 width:44%;
                 height:100%;
                 float: left;
-                background-color: blue;
+              
             }
             #storyText{
                 position: absolute;
@@ -34,10 +34,10 @@
                 bottom:50px;
                 left:56%;
                 right: 0px;
-                display: flex;
-                align-items: center;
+               /* display: flex;
+                align-items: center;*/
                 justify-content: center;
-                background-color:pink
+               
             }
             #choices{
                 position:absolute;
@@ -45,23 +45,29 @@
                 left:56%;
                 right:0px;
                 height:50px;
-                display: flex;
+               display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color:yellow;
+               
             }
 
 
             #b1,#b2, #b3, #b4
             {
                 display: inline-block;
-                background-color:purple;
-                color: white;
+                background-color: #F8F8FF;
+                color: black;
                 font-size:16px;
                 padding:10px;
                 margin:5px;
                 border-radius:8px;
                 text-decoration:none;
+            }
+
+            #storyimg{
+                max-height:97%;
+                max-width:97%;
+                width:97%;
             }
 
         </style>
@@ -85,19 +91,123 @@
 
     <div id ="container">
         <div id="leftPane">
+            <img id="storyimg" src="images/woods.jpg">
         </div>
-        <div id="rightPane">
+            <div id="rightPane">
             <div id="storyText">
+            <p id="ptext1"></p>
+            <p id="ptext2"></p>
+            <p id="ptext3"></p>
+            <p id="ptext4"></p>
             </div>
             <div id="choices">
-                <a id="b1" href="#"> Choice1</a>
-                <a id="b2" href="#"> Choice2</a>
-                <a id="b3" href="#"> Choice3</a>
-                <a id="b4" href="#"> Choice4</a>
+                <a id="b1" onclick= "bclick(1)" href="#"> Choice1</a>
+                <a id="b2" onclick= "bclick(2)"  href="#"> Choice2</a>
+                <a id="b3" onclick= "bclick(3)" href="#"> Choice3</a>
+                <a id="b4" onclick= "bclick(4)" href="#"> Choice4</a>
             </div>
         </div>
     </div>
 
+<script>
+    var pic = document.getElementById("storyimg");
+    var ptext1 = document.getElementById("ptext1");
+    var ptext2 = document.getElementById("ptext2");
+    var ptext3 = document.getElementById("ptext3");
+    var ptext4 = document.getElementById("ptext4");
+    var b1 =document.getElementById("b1");
+    var b2 =document.getElementById("b2"); 
+    var b3 =document.getElementById("b3");    
+    var b4 =document.getElementById("b4");  
+    var state = "intro";
+    intro();
 
+    function intro(){
+        pic.src = "images/woods.jpg";
+        ptext1.innerHTML="";
+        ptext2.innerHTML="";
+        ptext3.innerHTML="";
+        ptext4.innerHTML="";
+        b1.innerHTML="Yes";
+        b2.innerHTML="No";
+        b1.style.display ="block";
+        b2.style.display = "block";
+        b3.style.display ="none";
+        b4.style.display ="none";    
+    }     
+
+    function meetBob(){
+      pic.src = "images/bob.jpg";
+        ptext1.innerHTML="Hello.My name is Bob ";
+        ptext2.innerHTML="What would you like to do";
+        ptext3.innerHTML="";
+        ptext4.innerHTML="";
+        b1.innerHTML="Attack";
+        b2.innerHTML="Run";
+        b3.innerHTML="Stay";
+        b1.style.display ="block";
+        b2.style.display = "block";
+        b3.style.display ="none";
+        b4.style.display ="none";
+    }
+function attackWitch()
+{
+      pic.src = "images/Bully.jpeg";
+        ptext1.innerHTML="What weapon do you want to use ";
+        ptext2.innerHTML="What would you like to do";
+        ptext3.innerHTML="";
+        ptext4.innerHTML="";
+        b1.innerHTML="Pitchfork";
+        b2.innerHTML="Garlic";
+        b3.innerHTML="Holy water";
+        b1.style.display ="block";
+        b2.style.display = "block";
+        b3.style.display ="none";
+        b4.style.display ="none";
+        state = "meetWitch";
+
+}
+    function runFromWitch(){
+        
+    }
+
+    //state machine
+    function bclick(button)
+    {
+        if(state == "intro")
+        {
+            if (button == 1)
+            {
+                meetWitch();
+                state = "meetWitch";
+            }
+            else if(button == 2)
+            {
+                //Send them somewhere else
+                intro();
+                state = "intro";
+            }
+        }
+        else if(state == "meetWitch")
+        {
+            if (button ==1)
+            {
+                //Attack
+                attackWitch();
+                state = "attackWitch";
+            }
+            else if (button ==2)
+            {
+                //Run
+            }
+            else if(button ==3)
+            {
+                //Stay
+            }
+        }
+        return false;
+    }
+    
+</script>
     </body>
 </html>
